@@ -71,7 +71,7 @@ router.put('/:id', (req, res) => {
   })
   .then(dbProductData => {
     if (!dbProductData[0]) {
-      res.status(404)({message: 'No tag with this id.'});
+      res.status(404).json({message: 'No tag with this id.'});
       return;
     }
     res.json(dbProductData);
