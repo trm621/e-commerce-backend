@@ -61,14 +61,6 @@ router.post('/', (req, res) => {
     stock: req.body.stock,
     tagIds: req.body.tagIds
   })
-  .then(dbProductData => {
-    res.status(200).json(dbProductData);
-  })
-  .catch((err) => {
-    console.log(err);
-    res.status(400).json(err);
-  });
-  Product.create(req.body)
     .then((product) => {
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
