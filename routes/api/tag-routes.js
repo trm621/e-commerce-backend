@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Tag, Product, ProductTag } = require('../../models');
+const { Tag, Product, ProductTag, Category } = require('../../models');
 
 // The `/api/tags` endpoint
 
@@ -62,14 +62,41 @@ router.post('/', (req, res) => {
     console.log(err);
     res.status(500).json(err);
   });
-  // create a new tag
 });
 
 router.put('/:id', (req, res) => {
-  // update a tag's name by its `id` value
+  Tag.update({
+    individualHooks: true,
+    where: { id: req.params.id}
+  })
+  .then(dbProductData => {
+    if (!dbProductData[0]) {
+      res.status(404)({message: 'No tag with this id.'});
+      return;
+    }
+    res.json(dbProductData);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
 });
 
 router.delete('/:id', (req, res) => {
+  Tag.destroy({
+    where: { id: req.params.id}
+  })
+  .then(dbProductData => {
+    if (!dbProductData) {
+      res.status(404).json({message: 'No tag with this id.'});
+      return;
+    }
+    res.json(dbProductData);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json(err);
+  });
   // delete on tag by its `id` value
 });
 
