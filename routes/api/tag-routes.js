@@ -22,8 +22,6 @@ router.get('/', (req, res) => {
     console.log(err);
     res.status(500).json(err);
   });
-  // find all tags
-  // be sure to include its associated Product data
 });
 
 router.get('/:id', (req, res) => {
