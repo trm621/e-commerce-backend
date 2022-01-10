@@ -23,7 +23,7 @@ Product.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        isDeciamal: true
+        isDecimal: true
       }
     },
     stock: {
